@@ -1,6 +1,7 @@
 {
   "name": "emily-sam-project-3",
   "version": "1.0.0",
+  
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "axios": "^1.6.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-fetch": "^2.7.0"
   }
 }
