@@ -14,6 +14,35 @@
     />
     <button id="searchHotels">Search Hotels</button>
     <div id="hotelResults"></div>
+    <div class="display-4 text-center">Currency exchange rates</div>
+    <div class="APIContainer">
+      <h4>Find out current currency exchange rates</h4>
+      <div class="currencyContainer">
+        <div style="margin-top: 16px">
+          <p>From:</p>
+          <p>To:</p>
+        </div>
+        <div style="margin-left: 20px">
+          <input
+            class="form-control marginTopBottom"
+            type="text"
+            id="inputCurrencyFrom"
+            value="EUR"
+          />
+          <input
+            class="form-control marginTopBottom"
+            type="text"
+            id="inputCurrencyTo"
+            value="USD"
+          />
+          <button class="btn btn-primary" id="buttonCurrency">Calculate</button>
+        </div>
+        <div class="currencyResult">
+          <h4 id="currencyResult">Result: 0</h4>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
+    <script src="currency.js"></script>
   </body>
 </html>
