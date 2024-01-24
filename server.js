@@ -12,15 +12,13 @@ app.use(express.static('public')); // Serve static files from 'public' directory
 // app.use(cors());
 
 // Endpoint to get hotel details from Sky Scrapper API
-app.get('/api/hotelDetails', async (req, res) => {
-    const hotelId = req.query.hotelId || '106005202'; // Default ID if none provided
-    const entityId = req.query.entityId || '27537542'; // Default entity ID if none provided
-    const url = `https://sky-scrapper.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotelId=${hotelId}&entityId=${entityId}&currency=USD&market=en-US&countryCode=US`;
+app.get('/api/countries', async (req, res) => {
+  
+    const url = `https://restcountries.com/v3.1/all`;
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': process.env.SKYSCRAPPER_API_KEY,
-            'X-RapidAPI-Host': 'sky-scrapper.p.rapidapi.com'
+       
         }
     };
 
@@ -29,7 +27,7 @@ app.get('/api/hotelDetails', async (req, res) => {
         const data = await response.json();
         res.json(data);
     } catch (error) {
-        console.error('Error fetching hotel details:', error);
+        console.error('Error fetching country details:', error);
         res.status(500).send('Internal Server Error');
     }
 });

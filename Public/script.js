@@ -1,23 +1,40 @@
-// script.js
-function fetchHotelDetails(hotelId, entityId) {
-    // Construct URL with query parameters for hotelId and entityId, if needed
-    const url = `/api/hotelDetails?hotelId=${hotelId}&entityId=${entityId}`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Hotel Details:', data);
-            // Here you can further process the data, update the DOM, etc.
-        })
-        .catch(error => {
-            console.error('Error fetching hotel details:', error);
-        });
+function fetchCountries() {
+    fetch('/api/countries') // Adjust the endpoint if necessary
+        .then(response => response.json())
+        .then(data => displayCountries(data))
+        .catch(error => console.error('Error fetching countries:', error));
 }
 
-// Example call to fetchHotelDetails
-fetchHotelDetails('106005202', '27537542');
+// Call fetchCountries when the page loads
+document.addEventListener('DOMContentLoaded', fetchCountries);
+
+
+
+
+
+
+
+// displaying all countries
+const displayCountries = countries =>{
+    // console.log(countries);
+    const countriesHTML = countries.map(country => getCountry(country));
+    // displaying div to html
+    const container = document.getElementById('countries');
+    container.innerHTML = countriesHTML.join(' ');
+}
+
+// get data and set it to html
+const getCountry = (country) =>{
+    console.log(country)
+    return `
+        <div class="country-div">
+        <img src="${country.flags.png}">
+        <h2>${country.name.common}</h2>
+        <hr>
+        <h4>Population: ${country.population}</h4>
+        <h4>Regoin: ${country.region}</h4>
+        <h4>Capital: ${country.capital}</h4>
+        </div>
+    `
+}
+
