@@ -1,40 +1,36 @@
-function fetchCountries() {
-    fetch('/api/countries') // Adjust the endpoint if necessary
-        .then(response => response.json())
-        .then(data => displayCountries(data))
-        .catch(error => console.error('Error fetching countries:', error));
-}
+let searchBtn = document.getElementById("search-btn");
+let countryInp = document.getElementById("country-name");
 
-// Call fetchCountries when the page loads
-document.addEventListener('DOMContentLoaded', fetchCountries);
+searchBtn.addEventListener("click", () => {
+    let countryName = countryInp.value; // Use the input value dynamically
+    let finalURL = `/api/countries/${countryName}`; // Corrected URL
+    console.log(finalURL);
 
+    fetch(finalURL)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data && data.length > 0) { // Ensure data is received
+                console.log(data[0]);
+                console.log(data[0].capital ? data[0].capital[0] : 'Capital not found');
+                console.log(data[0].flags.svg);
+                console.log(data[0].name.common);
+                console.log(data[0].continents ? data[0].continents[0] : 'Continent not found');
+                
 
+                result.innerHTML = `<img src="${data[0].flags.svg}"
+                class="flag-img">
+                <h2>${data[0].name.common}</h2>
+                <div class="wrapper"> 
+                <div class="data-wrapper">
+                <h4>Capital:</h4>
+                <span>${data[0].capital[0]}</span>
+                <h4>Continent:</h4>
+                <span>${data[0].continents[0]}</span>`;
 
-
-
-
-
-// displaying all countries
-const displayCountries = countries =>{
-    // console.log(countries);
-    const countriesHTML = countries.map(country => getCountry(country));
-    // displaying div to html
-    const container = document.getElementById('countries');
-    container.innerHTML = countriesHTML.join(' ');
-}
-
-// get data and set it to html
-const getCountry = (country) =>{
-    console.log(country)
-    return `
-        <div class="country-div">
-        <img src="${country.flags.png}">
-        <h2>${country.name.common}</h2>
-        <hr>
-        <h4>Population: ${country.population}</h4>
-        <h4>Regoin: ${country.region}</h4>
-        <h4>Capital: ${country.capital}</h4>
-        </div>
-    `
-}
-
+            } else {
+                console.log("No data found for this country");
+            }
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
+});
