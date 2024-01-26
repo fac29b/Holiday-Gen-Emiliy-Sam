@@ -1,65 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    width: 100%;
 }
 
 
 body{
-    background-color: #637d96;
+    background-color: purple;
    
 }
 h1 {
     display: flex;
     text-align: center;
     justify-content: center;
+    font-family: 'Fugaz One', sans-serif;
+    font-size: 5em;
+    color: yellow;
 }
 .container {
     background-color: azure;
-    width: 70vw;
-    max-width: 38em;
-    padding: 3em 2em;
-    position: absolute;
+    max-width: 25%;
+    max-height: fit-content;
+    padding: 1.5em;
+    position: fixed;
     transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%
+    top: 40%;
+    left: 50%;
+    text-align: center;
 }
 
 .search-wrapper {
     display: flex;
     width: 20vw;
     height:6vh;
+    padding-top: 0em;
 }
+
+#country-name{
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+}
+
 #search-btn {
-    background-color: #3d77b6; 
+    background-color: purple; 
     text-align: center;
     height: fit-content;
     color: white;
     border: none;
     width:auto;
     padding: 10px ;
+    margin-top: 10px;
+    margin-bottom: 0px;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 1rem;
+    font-family: 'Fugaz One', sans-serif;
+    color: yellow;
 }
 
+#search-btn:hover {
+    transform: scale(1.2);
+    transition: transform 1.5s ease;
+    background-color: fuchsia;
+  }
+
+
 #result {
-    margin-top: 1.25em;
+    position: flex relative;
+    background-color: black;
+    margin-top: 5em;
+    max-width: 45%;
+    max-height: fit-content;
+    overflow: auto;
+    border-radius: 10px;
+    padding: 3em;
+    margin: 1em 2em 1em 3em;
+    color: white;
 }
+
 .container .flag-img {
     display: block;
     width: 50%;
-    min-width: auto;
     margin: 1.7em auto 1.2em auto;
 }
 .container h2{
-    font-weight: 700;
-    color: #3d77b6;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1.8em;
+    font-family: 'Fugaz One', sans-serif;
+    font-size: 2.5em;
+    color: purple;
+    padding-top: 0em;
 }
 .data-wrapper {
     margin-bottom: 1em;
@@ -78,12 +111,21 @@ h1 {
     display: inline;
     font-weight: 500;
     text-align: center;
-
 }
-/* now do styles as much as you want */
-/* add media query for responsive */
+
+#bannerWrapper {
+ position: relative;
+ display: flex;
+}
+
+.banner {
+    flex: 1;
+    width: 33%;
+}
+
 @media screen and (max-width: 576px){
     .countries{
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
