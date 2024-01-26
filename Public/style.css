@@ -17,7 +17,9 @@ h1 {
 .container {
     background-color: azure;
     width: 70vw;
-    max-width: 38em;
+    max-width: fit-content;
+    max-height: fit-content;
+    padding-top: 10em;
     padding: 3em 2em;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -30,6 +32,7 @@ h1 {
     width: 20vw;
     height:6vh;
 }
+
 #search-btn {
     background-color: #3d77b6; 
     text-align: center;
@@ -45,12 +48,12 @@ h1 {
 }
 
 #result {
-    margin-top: 1.25em;
+    margin-top: 5em;
+    max-width: fit-content;
 }
 .container .flag-img {
     display: block;
     width: 50%;
-    min-width: auto;
     margin: 1.7em auto 1.2em auto;
 }
 .container h2{
@@ -78,10 +81,8 @@ h1 {
     display: inline;
     font-weight: 500;
     text-align: center;
-
 }
-/* now do styles as much as you want */
-/* add media query for responsive */
+
 @media screen and (max-width: 576px){
     .countries{
         grid-template-columns: repeat(1, 1fr);
