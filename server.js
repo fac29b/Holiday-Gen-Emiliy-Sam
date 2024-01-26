@@ -1,30 +1,22 @@
 const express = require('express');
-const path = require('path');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
 const app = express();
 
-// Correct placement: After the app has been initialized
 app.use(express.static('public')); // Serve static files from 'public' directory
 
-// Optionally, re-enable CORS for all routes if needed
-// app.use(cors());
-
-// Endpoint to get hotel details from Sky Scrapper API
-app.get('/api/countries', async (req, res) => {
-  
-    const url = `https://restcountries.com/v3.1/all`;
-    const options = {
-        method: 'GET',
-        headers: {
-       
-        }
-    };
+// Define a new endpoint that includes a country name as part of the URL path
+app.get('/api/countries/:name', async (req, res) => {
+    // Extract the country name from the URL path parameter
+    const countryName = req.params.name;
+    const url = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
 
     try {
-        const response = await fetch(url, options);
+        // Fetch data from the REST Countries API
+        const response = await fetch(url);
         const data = await response.json();
+        // Send the fetched data back to the client
         res.json(data);
     } catch (error) {
         console.error('Error fetching country details:', error);
