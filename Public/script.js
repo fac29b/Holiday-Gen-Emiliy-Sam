@@ -1,11 +1,6 @@
 let searchBtn = document.getElementById("search-btn");
 let countryInp = document.getElementById("country-name");
 
-searchBtn.addEventListener("click", async () => {
-    let countryName = countryInp.value;
-    await fetchAndDisplayCountryDetails(countryName);
-    await makeTravelPlan(countryName);
-});
 
 function fetchAndDisplayCountryDetails(countryName) {
     let finalURL = `/api/countries/${countryName}`;
@@ -63,11 +58,18 @@ async function makeTravelPlan() {
       }
   
       const data = await response.json();
-      document.getElementById("chatGPT-results").innerHTML =
-        data.choices[0].message.content;
+      const chatGPTResults = document.getElementById("chatGPT-results");
+      chatGPTResults.innerHTML = data.choices[0].message.content;
+      chatGPTResults.style.display = "block";
       console.log(response);
     } catch (error) {
       console.log("error fetching travel plan", error.message);
     }
   }
   makeTravelPlan();
+
+  searchBtn.addEventListener("click", async () => {
+    let countryName = countryInp.value;
+    await fetchAndDisplayCountryDetails(countryName);
+    await makeTravelPlan(countryName);
+});

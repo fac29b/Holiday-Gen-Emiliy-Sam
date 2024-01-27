@@ -123,6 +123,14 @@ h1 {
     width: 33%;
 }
 
+#chatGPT-results{
+    display: none;
+}
+
+#loading-indicator{
+    display: none;
+}
+
 @media screen and (max-width: 576px){
     .countries{
         grid-template-columns: repeat(1, 1fr);
