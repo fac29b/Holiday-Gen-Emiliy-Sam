@@ -34,10 +34,10 @@ app.get("/openai", async (req, res) => {
     messages: [
       {
         role: "system",
-        content: "Provide a seven day holiday plan for ${countryName}."
+        content: `Provide a seven day holiday plan for ${countryName}.`
       },
     ],
-   model: "gpt=3.5=turbo",
+   model: "gpt-3.5-turbo",
    max_tokens: 300,
   });
   res.json(completion);
