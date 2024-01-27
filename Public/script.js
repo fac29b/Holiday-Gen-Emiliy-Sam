@@ -70,3 +70,4 @@ async function makeTravelPlan() {
       console.log("error fetching travel plan", error.message);
     }
   }
+  makeTravelPlan();

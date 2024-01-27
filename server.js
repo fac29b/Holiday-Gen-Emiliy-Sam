@@ -33,7 +33,7 @@ app.get("/openai", async (req, res) => {
   const completion = await openai.chat.completions.create({
     messages: [
       {
-        role: "system",
+        role: "user",
         content: `Provide a seven day holiday plan for ${countryName}.`
       },
     ],
