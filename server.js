@@ -1,7 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 require('dotenv').config();
-
+const {configuration, OpenAI} = require('openai');
 const app = express();
 
 app.use(express.static('public')); // Serve static files from 'public' directory
@@ -22,6 +22,25 @@ app.get('/api/countries/:name', async (req, res) => {
         console.error('Error fetching country details:', error);
         res.status(500).send('Internal Server Error');
     }
+});
+
+const openai = new OpenAI ({
+  apiKey: process.env.openaiAPI,
+});
+
+app.get("/openai", async (req, res) => {
+  const countryName = req.params.name;
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: "user",
+        content: `Provide a seven day holiday plan for ${countryName}.`
+      },
+    ],
+   model: "gpt-3.5-turbo",
+   max_tokens: 300,
+  });
+  res.json(completion);
 });
 
 const port = process.env.PORT || 3000;
