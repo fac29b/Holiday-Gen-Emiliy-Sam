@@ -51,6 +51,9 @@ function fetchAndDisplayCountryDetails(countryName) {
         });
 }
 async function makeTravelPlan() {
+    const chatGPTResults = document.getElementById("chatGPT-results");
+    chatGPTResults.innerHTML = 'Loading travel plans...'; 
+    chatGPTResults.style.display = "block";
     try {
       const response = await fetch(`/openai`);
   
@@ -60,17 +63,22 @@ async function makeTravelPlan() {
   
       const data = await response.json();
       const chatGPTResults = document.getElementById("chatGPT-results");
-      chatGPTResults.innerHTML = data.choices[0].message.content;
+      chatGPTResults.innerHTML = `
+      <div style="background-color: #f0f0f0; padding: 15px; border-radius: 10px;">
+          <h2 style="color: #333;">Travel Plan</h2>
+          <p style="color: #555;">${data.choices[0].message.content}</p>
+      </div>`;
       chatGPTResults.style.display = "block";
       console.log(response);
     } catch (error) {
       console.log("error fetching travel plan", error.message);
     }
   }
-  makeTravelPlan();
+//   makeTravelPlan();
 
   searchBtn.addEventListener("click", async () => {
     let countryName = countryInp.value;
     await fetchAndDisplayCountryDetails(countryName);
     await makeTravelPlan(countryName);
+    console.log(countryName);
 });

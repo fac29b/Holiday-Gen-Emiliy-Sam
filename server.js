@@ -35,7 +35,7 @@ app.get("/openai", async (req, res) => {
     messages: [
       {
         role: "user",
-        content: `Provide a seven day holiday plan for ${country}.`
+        content: `Provide a seven day holiday plan for ${country}. Provide the information in organised bullet points.`
       },
     ],
    model: "gpt-3.5-turbo",
