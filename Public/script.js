@@ -1,11 +1,6 @@
 let searchBtn = document.getElementById("search-btn");
 let countryInp = document.getElementById("country-name");
 
-searchBtn.addEventListener("click", async () => {
-    let countryName = countryInp.value;
-    await fetchAndDisplayCountryDetails(countryName);
-    await makeTravelPlan(countryName);
-});
 
 function fetchAndDisplayCountryDetails(countryName) {
     let finalURL = `/api/countries/${countryName}`;
@@ -22,10 +17,10 @@ function fetchAndDisplayCountryDetails(countryName) {
                 let result = document.getElementById("result");
                 result.innerHTML = `
                     <img src="${countryData.flags.svg}" class="flag-img">
-                    <h2>${countryData.name.common}</h2>
+                    <h3>${countryData.name.common}</h3>
                     <div class="wrapper"> 
                         <div class="data-wrapper">
-                            <ul>
+                            <ul class="fact-list">
                                 <li>Capital: <span>${countryData.capital[0]}</span></li>
                                 <br>
                                 <li>Continent: <span>${countryData.continents[0]}</span></li>
@@ -39,11 +34,12 @@ function fetchAndDisplayCountryDetails(countryName) {
                                 <li>Drives on the: <span>${countryData.car.side}</span></li>
                                 <br>
                                 <li>Time Zones: <span>${timeString}</span></li>
-                            </ul>
-                            <br>
-                            <br>
-                            <h4>Country map:</h4>
+                                <br>
+                                <li>Country map:</li>
                             <iframe src="${countryData.maps.googleMaps}" width="400" height="300" style="border:0;"></iframe>
+                            </ul>
+                           <br>
+      
                         </div>
                     </div>`;
             } else {
@@ -63,11 +59,18 @@ async function makeTravelPlan() {
       }
   
       const data = await response.json();
-      document.getElementById("chatGPT-results").innerHTML =
-        data.choices[0].message.content;
+      const chatGPTResults = document.getElementById("chatGPT-results");
+      chatGPTResults.innerHTML = data.choices[0].message.content;
+      chatGPTResults.style.display = "block";
       console.log(response);
     } catch (error) {
       console.log("error fetching travel plan", error.message);
     }
   }
   makeTravelPlan();
+
+  searchBtn.addEventListener("click", async () => {
+    let countryName = countryInp.value;
+    await fetchAndDisplayCountryDetails(countryName);
+    await makeTravelPlan(countryName);
+});

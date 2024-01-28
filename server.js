@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 const {configuration, OpenAI} = require('openai');
 const app = express();
+let country = "";
 
 app.use(express.static('public')); // Serve static files from 'public' directory
 
@@ -11,6 +12,7 @@ app.get('/api/countries/:name', async (req, res) => {
     // Extract the country name from the URL path parameter
     const countryName = req.params.name;
     const url = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
+    country = countryName;
 
     try {
         // Fetch data from the REST Countries API
@@ -29,16 +31,15 @@ const openai = new OpenAI ({
 });
 
 app.get("/openai", async (req, res) => {
-  const countryName = req.params.name;
   const completion = await openai.chat.completions.create({
     messages: [
       {
         role: "user",
-        content: `Provide a seven day holiday plan for ${countryName}.`
+        content: `Provide a seven day holiday plan for ${country}.`
       },
     ],
    model: "gpt-3.5-turbo",
-   max_tokens: 300,
+   max_tokens: 2000,
   });
   res.json(completion);
 });
