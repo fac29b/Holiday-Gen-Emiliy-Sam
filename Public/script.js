@@ -93,8 +93,7 @@ async function makeTravelPlan() {
       const data = await response.json();
       const chatGPTResults = document.getElementById("chatGPT-results");
       chatGPTResults.innerHTML = `
-      <div style="background-color: #f0f0f0; padding: 15px; border-radius: 10px;">
-          <h2 style="color: #333;">Travel Plan</h2>
+      <div padding: 15px; border-radius: 10px;">
           <p style="color: #555;">${data.choices[0].message.content}</p>
       </div>`;
       chatGPTResults.style.display = "block";
@@ -103,11 +102,38 @@ async function makeTravelPlan() {
       console.log("error fetching travel plan", error.message);
     }
   }
-//   makeTravelPlan();
+
+  async function fetchImages() {
+    try {
+        const response = await fetch('/unsplash');
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data; 
+    } catch (error) {
+        console.error('Error fetching images:', error);
+        return [];
+    }
+}
+  function displayImages(images) {
+    const imageContainer = document.getElementById("image-container");
+
+    console.log("Number of images:", images.length);
+    imageContainer.innerHTML = "";
+    images.forEach(image => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image.urls.regular;
+        const imageDiv = document.createElement("div");
+        imageDiv.classList.add("image-item");
+        imageDiv.appendChild(imgElement);
+        imageContainer.appendChild(imageDiv);
+    });
+}
 
   searchBtn.addEventListener("click", async () => {
-    // let countryName = countryInp.value;
     await fetchAndDisplayCountryDetails();
+    const images = await fetchImages();
     await makeTravelPlan();
-    // console.log();
+    await displayImages(images);
 });

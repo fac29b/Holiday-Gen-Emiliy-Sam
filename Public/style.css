@@ -149,6 +149,12 @@ h2{
     display: none;
 }
 
+.chat-subtitles{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1.4em;
+}
+
 footer{
     background-color: yellow;
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 require('dotenv').config();
 const {configuration, OpenAI} = require('openai');
+const { createApi } = require('unsplash-js');
 const app = express();
 let country = "";
 
@@ -35,13 +36,29 @@ app.get("/openai", async (req, res) => {
     messages: [
       {
         role: "user",
-        content: `Provide a seven day holiday plan for ${country}. Provide the information in organised bullet points.`
+        content: `Provide a seven day holiday plan for ${country}. Provide the information formatted to in HTML. The title should read 'Seven Days in ${country} and be written in <h3>, and subtitles should be in <h4 class="chat-subtitles">. Do not style anything that is returned or use bullet points.`
       },
     ],
    model: "gpt-3.5-turbo",
    max_tokens: 2000,
   });
   res.json(completion);
+});
+
+  const unsplash = createApi({
+    accessKey: process.env.unsplashAPI,
+    fetch: fetch,
+  });
+
+  app.get('/search/photos', async (req, res) => {
+    try {
+        const response = await unsplash.search.photos(country, 1, 10);
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching images', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 const port = process.env.PORT || 3000;
