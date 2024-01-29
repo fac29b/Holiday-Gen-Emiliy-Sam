@@ -61,8 +61,7 @@ h3 {
     color: white;
     border: none;
     width:auto;
-    padding: 10px ;
-    margin-top: 10px;
+    padding: 10px;
     margin-bottom: 0px;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
@@ -133,16 +132,23 @@ h2{
     padding-top: 0em;
 }
 
-#bannerWrapper {
+.bannerWrapper {
  position: relative;
  display: flex;
+ overflow: hidden;
+ width: 100%;
+ margin: 0 auto;
+ max-height: 500px;
+ object-fit: cover;
 }
 
 .banner {
-    flex: 1;
+    flex: 1 0 auto;
     width: 33%;
-}
-
+    height: auto;
+    transition: opacity 0.5s ease;
+    object-fit: cover;
+  }
 
 
 #loading-indicator{
@@ -153,6 +159,23 @@ h2{
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 1.4em;
+}
+
+#image-container{
+display: flex;
+justify-content: center;
+text-align: center;
+}
+
+
+.image-item{
+    transition: 1s;
+    display: none;
+}
+
+.image-item img{
+    max-height: 500px;
+    max-width: fit-content;
 }
 
 footer{

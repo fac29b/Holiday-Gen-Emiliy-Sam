@@ -17,7 +17,7 @@ function getRandomCountry() {
     "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
     "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
     "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau",
-    "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
+    "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
     "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa",
     "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
     "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan",
@@ -103,39 +103,42 @@ async function makeTravelPlan() {
     }
   }
 
-  async function fetchImages() {
+  async function fetchImagesForBanner() {
     try {
-        const response = await fetch('/unsplash');
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-        const images = await response.json();
-        return images; 
+      const response = await fetch('/unsplash'); // Replace '/unsplash' with your API endpoint
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+      const images = await response.json();
+      return images; 
     } catch (error) {
-        console.error('Error fetching images:', error);
-        return [];
+      console.error('Error fetching images for banner:', error);
+      return [];
     }
-}
-  function displayImages(images) {
-    const imageContainer = document.getElementById("image-container");
-
-    console.log("Number of images:", images.length);
-    imageContainer.innerHTML = "";
-    images.forEach(image => {
-        const imgElement = document.createElement("img");
-        imgElement.src = image.urls.regular;
-        
-        const imageDiv = document.createElement("div");
-        imageDiv.classList.add("image-item");
-        imageDiv.appendChild(imgElement);
-        imageContainer.appendChild(imageDiv);
+  }
+  
+  async function updateBannerImages() {
+    const images = await fetchImagesForBanner();
+    if (images.length === 0) {
+      console.log('No images found for banner.');
+      return;
+    }
+  
+    const bannerImages = document.querySelectorAll(".banner");
+    bannerImages.forEach((image, index) => {
+      if (images[index]) {
+        image.src = images[index].urls.regular;
+        image.alt = images[index].alt_description;
+      }
     });
-}
-
+  }
+  
   searchBtn.addEventListener("click", async () => {
     await fetchAndDisplayCountryDetails();
-    const images = await fetchImages();
-    displayImages(images);
+    await updateBannerImages();
     await makeTravelPlan();
-    
-});
+  });
+  
+  
+
+  
