@@ -109,8 +109,8 @@ async function makeTravelPlan() {
         if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
-        const data = await response.json();
-        return data; 
+        const images = await response.json();
+        return images; 
     } catch (error) {
         console.error('Error fetching images:', error);
         return [];
@@ -124,6 +124,7 @@ async function makeTravelPlan() {
     images.forEach(image => {
         const imgElement = document.createElement("img");
         imgElement.src = image.urls.regular;
+        
         const imageDiv = document.createElement("div");
         imageDiv.classList.add("image-item");
         imageDiv.appendChild(imgElement);
@@ -134,6 +135,7 @@ async function makeTravelPlan() {
   searchBtn.addEventListener("click", async () => {
     await fetchAndDisplayCountryDetails();
     const images = await fetchImages();
+    displayImages(images);
     await makeTravelPlan();
-    await displayImages(images);
+    
 });
