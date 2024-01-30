@@ -1,5 +1,7 @@
 let searchBtn = document.getElementById("search-btn");
 let countryInp = document.getElementById("country-name");
+let chatGPTResultsLoaded = false;
+let countryDetailsLoaded = false;
 
 function getRandomCountry() {
   const countries = [
@@ -7,7 +9,7 @@ function getRandomCountry() {
     "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
     "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
     "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia",
-    "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia",
+    "Comoros", "Democratic Republic of the Congo", "Republic of the Congo", "Costa Rica", "Cote d'Ivoire", "Croatia",
     "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
     "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
     "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
@@ -17,7 +19,7 @@ function getRandomCountry() {
     "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
     "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
     "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau",
-    "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
+    "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
     "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa",
     "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
     "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan",
@@ -33,6 +35,7 @@ return countries[getRandomCountryIndex];
 function fetchAndDisplayCountryDetails() {
   let countryName = getRandomCountry();
     let finalURL = `/api/countries/${countryName}`;
+    
 
     fetch(finalURL)
         .then(response => response.json())
@@ -71,6 +74,7 @@ function fetchAndDisplayCountryDetails() {
       
                         </div>
                     </div>`;
+                    countryDetailsLoaded=true;
             } else {
                 console.log("No data found for this country");
             }
@@ -98,44 +102,57 @@ async function makeTravelPlan() {
       </div>`;
       chatGPTResults.style.display = "block";
       console.log(response);
+      chatGPTResultsLoaded = true;
     } catch (error) {
       console.log("error fetching travel plan", error.message);
     }
   }
 
-  async function fetchImages() {
+  async function fetchImagesForBanner() {
     try {
-        const response = await fetch('/unsplash');
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-        const images = await response.json();
-        return images; 
+      const response = await fetch('/unsplash'); 
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+      const images = await response.json();
+      return images; 
     } catch (error) {
-        console.error('Error fetching images:', error);
-        return [];
+      console.error('Error fetching images for banner:', error);
+      return [];
     }
-}
-  function displayImages(images) {
-    const imageContainer = document.getElementById("image-container");
-
-    console.log("Number of images:", images.length);
-    imageContainer.innerHTML = "";
-    images.forEach(image => {
-        const imgElement = document.createElement("img");
-        imgElement.src = image.urls.regular;
-        
-        const imageDiv = document.createElement("div");
-        imageDiv.classList.add("image-item");
-        imageDiv.appendChild(imgElement);
-        imageContainer.appendChild(imageDiv);
+  }
+  
+  async function updateBannerImages() {
+    const images = await fetchImagesForBanner();
+    if (images.length === 0) {
+      console.log('No images found for banner.');
+      return;
+    }
+  
+    const bannerImages = document.querySelectorAll(".banner");
+    bannerImages.forEach((image, index) => {
+      if (images[index]) {
+        image.src = images[index].urls.regular;
+        image.alt = images[index].alt_description;
+      }
     });
-}
+  }
 
+  let words = document.getElementById("find-yourself");
+  
   searchBtn.addEventListener("click", async () => {
+    words.style.display = "none";
+    document.getElementById("container").style.backgroundColor = "transparent";
+    document.getElementById("search-btn").style.fontSize = "2em";
     await fetchAndDisplayCountryDetails();
-    const images = await fetchImages();
-    displayImages(images);
+    await updateBannerImages();
     await makeTravelPlan();
-    
+
+    if (chatGPTResultsLoaded && countryDetailsLoaded === true) {
+      document.getElementById("results-box").style.display = "flex";
+    }
 });
+  
+  
+
+  

@@ -11,13 +11,9 @@ global.fetch = fetch;
 const unsplash = createApi({ accessKey: process.env.unsplashAPI });
 
 
+app.use(express.static('public')); 
 
-// Call the function to get photos
-// getPhotos().catch(console.error);
 
-app.use(express.static('public')); // Serve static files from 'public' directory
-
-// Define a new endpoint that includes a country name as part of the URL path
 app.get('/api/countries/:name', async (req, res) => {
     const countryName = req.params.name;
     const url = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
@@ -51,18 +47,10 @@ app.get("/openai", async (req, res) => {
     res.json(completion);
 });
 
-// Function to get photos from Unsplash - Now properly inside an async function
 
-
-// async function getPhotos() {
-//   const photos = await unsplash.search.getPhotos({ query: "tiger" });
-//   console.log(JSON.stringify(photos, null, 2));
-// }
-
-// This endpoint should be added to your server.js file.
 app.get('/unsplash', async (req, res) => {
   try {
-      const photosResponse = await unsplash.search.getPhotos({ query: "tiger" });
+      const photosResponse = await unsplash.search.getPhotos({ query: country });
       const photos = photosResponse.response.results;
       res.json(photos);
   } catch (error) {

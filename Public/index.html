@@ -20,7 +20,7 @@
   </head>
   <body>
     <h1>GenHoliday</h1>
-    <div id="bannerWrapper">
+    <div class="bannerWrapper">
       <img
         src="images/japan.jpg"
         class="banner"
@@ -39,11 +39,9 @@
       />
     </div>
 
-    <div class="container">
-      <h2>Where will you find yourself?</h2>
-      <div class="search-wrapper">
-        <!-- <input type="text" id="country-name" placeholder="Enter Country" /> -->
-      </div>
+    <div id="container">
+      <h2 id="find-yourself">Where will you find yourself?</h2>
+      <div class="search-wrapper"></div>
       <div class="button-wrapper">
         <button id="search-btn">Take me away!</button>
       </div>
@@ -53,7 +51,8 @@
       <div id="chatGPT-results"></div>
     </div>
     <div id="loading-indicator">Loading...</div>
-    <div id="image-container">Image div</div>
+    <div></div>
+
     <footer>
       <p class="footer-text">
         Please note that all travel is undertaken at your own risk, and
