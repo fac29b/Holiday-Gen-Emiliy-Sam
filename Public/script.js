@@ -1,5 +1,7 @@
 let searchBtn = document.getElementById("search-btn");
 let countryInp = document.getElementById("country-name");
+let chatGPTResultsLoaded = false;
+let countryDetailsLoaded = false;
 
 function getRandomCountry() {
   const countries = [
@@ -7,7 +9,7 @@ function getRandomCountry() {
     "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
     "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
     "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia",
-    "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Cote d'Ivoire", "Croatia",
+    "Comoros", "Democratic Republic of the Congo", "Republic of the Congo", "Costa Rica", "Cote d'Ivoire", "Croatia",
     "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
     "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
     "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
@@ -33,6 +35,7 @@ return countries[getRandomCountryIndex];
 function fetchAndDisplayCountryDetails() {
   let countryName = getRandomCountry();
     let finalURL = `/api/countries/${countryName}`;
+    
 
     fetch(finalURL)
         .then(response => response.json())
@@ -71,6 +74,7 @@ function fetchAndDisplayCountryDetails() {
       
                         </div>
                     </div>`;
+                    countryDetailsLoaded=true;
             } else {
                 console.log("No data found for this country");
             }
@@ -98,6 +102,7 @@ async function makeTravelPlan() {
       </div>`;
       chatGPTResults.style.display = "block";
       console.log(response);
+      chatGPTResultsLoaded = true;
     } catch (error) {
       console.log("error fetching travel plan", error.message);
     }
@@ -105,7 +110,7 @@ async function makeTravelPlan() {
 
   async function fetchImagesForBanner() {
     try {
-      const response = await fetch('/unsplash'); // Replace '/unsplash' with your API endpoint
+      const response = await fetch('/unsplash'); 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
       }
@@ -132,12 +137,21 @@ async function makeTravelPlan() {
       }
     });
   }
+
+  let words = document.getElementById("find-yourself");
   
   searchBtn.addEventListener("click", async () => {
+    words.style.display = "none";
+    document.getElementById("container").style.backgroundColor = "transparent";
+    document.getElementById("search-btn").style.fontSize = "2em";
     await fetchAndDisplayCountryDetails();
     await updateBannerImages();
     await makeTravelPlan();
-  });
+
+    if (chatGPTResultsLoaded && countryDetailsLoaded === true) {
+      document.getElementById("results-box").style.display = "flex";
+    }
+});
   
   
 
