@@ -13,6 +13,9 @@ const unsplash = createApi({ accessKey: process.env.unsplashAPI });
 
 app.use(express.static('public')); 
 
+app.get('/', (req, res) => {
+  res.send('Welcome to my Node.js Project');
+});
 
 app.get('/api/countries/:name', async (req, res) => {
     const countryName = req.params.name;
