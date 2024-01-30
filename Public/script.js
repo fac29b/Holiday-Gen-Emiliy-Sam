@@ -141,17 +141,32 @@ async function makeTravelPlan() {
   let words = document.getElementById("find-yourself");
   
   searchBtn.addEventListener("click", async () => {
+    // Reset the loaded flags
+    chatGPTResultsLoaded = false;
+    countryDetailsLoaded = false;
+
+    document.getElementById("loading-indicator").style.display = "block";
+
+ 
+    document.getElementById("results-box").style.display = "none";
+
     words.style.display = "none";
     document.getElementById("container").style.backgroundColor = "transparent";
     document.getElementById("search-btn").style.fontSize = "2em";
-    await fetchAndDisplayCountryDetails();
-    await updateBannerImages();
-    await makeTravelPlan();
 
-    if (chatGPTResultsLoaded && countryDetailsLoaded === true) {
-      document.getElementById("results-box").style.display = "flex";
+
+    await Promise.all([fetchAndDisplayCountryDetails(), makeTravelPlan(), updateBannerImages()]);
+
+
+    if (chatGPTResultsLoaded && countryDetailsLoaded) {
+  
+        document.getElementById("loading-indicator").style.display = "none";
+
+
+        document.getElementById("results-box").style.display = "flex";
     }
 });
+
   
   
 
