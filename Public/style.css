@@ -179,6 +179,12 @@ li{
     margin: 0.5em;
     margin-top: 1em;
     width: fit-content;
+    cursor: pointer;
+}
+
+#booking-link:hover {
+    transform: scale(1.2);
+    background-color: blue;
 }
 
 /* Flag image */
