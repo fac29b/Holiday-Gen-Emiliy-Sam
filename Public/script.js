@@ -145,6 +145,8 @@ async function makeTravelPlan() {
     chatGPTResultsLoaded = false;
     countryDetailsLoaded = false;
 
+    document.getElementById("travel-links").style.display = "none";
+
     document.getElementById("loading-container").style.display = "block";
 
     words.style.display = "none";
