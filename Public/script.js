@@ -161,6 +161,7 @@ async function makeTravelPlan() {
  
     if (chatGPTResultsLoaded && countryDetailsLoaded) {
         document.getElementById("results-box").style.display = "flex";
+        document.getElementById("travel-links").style.display = "flex";
     } else {
       console.error("GPT Failed to load country details.");
         
