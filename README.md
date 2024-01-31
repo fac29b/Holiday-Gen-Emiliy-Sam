@@ -75,6 +75,7 @@ searchBtn.addEventListener("click", async () => {
 
 With more time and resources, we'd like to add the following to the project:
 
+- working inlaid google maps. This may require an https connection, or using the Google Maps API directly.
 - better image filtering. At the moment, there are some very small countries that only return a couple of images, and others where you get very similar images repeatedly. It also sometimes makes mistakes because it is searching based on how Unsplash users tag their photos so, for example, it returned a picture of Central Park for Central African Republic. We'd like to use AI to filter these, and also ensure that all the images coming through include ALT text.
 - improved user options. We'd like to allow users to customise their planning options, such as choosing the length of a holiday or specifying a continent or language spoken to filter their random results.
 - integration with other travel planning apps. We'd either like to directly connect this to flight and hotel APIs, or be able to directly populate links to a site like booking.com so if, for example, a person gets Bulgaria it will have a link that automatically loads flights to Sofia based on the user's current location. 
