@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this project, as part of our final Founders and Coders assignment, we have created a random holiday generator. Using the REST Countries Unsplash Images, and the OpenAI APIs, with the click of a button a seven-day holiday itinerary is generated, including images of your destination. Instead of imposing our own morality and judgements on the safety and security of different countries, GenHoliday exists in a utopia where there are no conflicts and everyone is free to travel anywhere. Click a button, sit back, and see where GenHoliday takes you!
+In this project, as part of our final Founders and Coders assignment, we have created a random holiday generator. Using the REST Countries, Unsplash Images, and the OpenAI APIs, with the click of a button a seven-day holiday itinerary is generated, including images of your destination. Instead of imposing our own morality and judgements on the safety and security of different countries, GenHoliday exists in a utopia where there are no conflicts and everyone is free to travel anywhere. Click a button, sit back, and see where GenHoliday takes you!
 
 ## Cloning instructions
 
