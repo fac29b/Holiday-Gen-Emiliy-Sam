@@ -40,6 +40,10 @@ h3 {
     text-align: center;
 }
 
+li{
+    list-style-type: none;
+}
+
 /* Container styles */
 #container {
     display: flex;
@@ -51,7 +55,11 @@ h3 {
     padding: 1.5em;
     margin: auto; 
     text-align: center;
-    position: relative;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
 }
 
 /* Search styles */
@@ -77,6 +85,7 @@ h3 {
     width: auto;
     padding: 10px;
     cursor: pointer;
+    margin-top: 1em;
     transition: background-color 0.2s, transform 0.2s;
     border-radius: 10px;
     font-size: 1rem;
@@ -89,15 +98,24 @@ h3 {
 }
 
 /* Loading indicator */
+
+#loading-container{
+    display: none;
+    margin-bottom: 1em;
+}
 #loading-indicator {
-    display: none; 
-    border: 5px solid #f3f3f3; 
+    border: 5px solid yellow; 
     border-top: 5px solid purple; 
     border-radius: 50%;
     width: 40px;
     height: 40px;
     animation: spin 2s linear infinite;
     margin: 20px auto; 
+}
+
+#loading-text{
+    color: yellow;
+    text-align: center;
 }
 
 @keyframes spin {
@@ -110,6 +128,7 @@ h3 {
     flex-direction: row;
     justify-content: space-evenly;
     display: none;
+    flex-wrap: wrap;
 }
 
 /* Result and ChatGPT results styles */
@@ -132,17 +151,20 @@ h3 {
 #travel-links {
     width: fit-content;
     display: none;
-    margin: auto;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
     flex-wrap: wrap;
     background-color: black;
     text-align: center;
     border-radius: 15px;
-    padding-bottom: 3em;
+    padding: 2em;
+
 }
 
 #link-title {
     color: yellow;
-    margin: 1em;
     font-size: 2em;
     
 }
@@ -151,10 +173,11 @@ h3 {
     background-color: #003580;
     color: #feba02;
     font-family: 'Roboto Slab', serif;
-    font-size: 2em;
+    font-size: 1.5em;
     border-radius: 10px;
-    padding: 2em;
-    margin-bottom: 1em;
+    padding: 0.5em;
+    margin: 0.5em;
+    margin-top: 1em;
     width: fit-content;
 }
 
@@ -265,9 +288,25 @@ footer {
         padding-left: 1em;
         padding-right: 1em;
     }
+
+    #travel-links{
+        padding: 0.5em;
+    }
+
+    #link-title {
+        font-size: 1em;
+        
+    }
+
+    #booking-link {
+        font-size: 1em;
+      
+        padding: 0.5em;
+        margin: 0.5em;
+    }
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1030px) {
     .bannerWrapper {
         flex-wrap: wrap-reverse;
         max-height: fit-content;
@@ -275,4 +314,5 @@ footer {
 
     .banner {
         width: 100%;
+    }
 }
