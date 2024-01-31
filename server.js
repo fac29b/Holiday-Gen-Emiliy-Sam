@@ -41,7 +41,7 @@ app.get("/openai", async (req, res) => {
         messages: [
             {
                 role: "user",
-                content: `Provide a seven day holiday plan for ${country}. Provide the information formatted in HTML. The title should read 'Seven Days in ${country}' and be written in <h3>, and subtitles should be in <h4 class="chat-subtitles">. Do not style anything that is returned or use bullet points.`
+                content: `Provide a seven day holiday plan for ${country}. Provide the information formatted in HTML. The title should read 'Seven Days in ${country}!' and be written in <h3>, and subtitles should be in <h4 class="chat-subtitles">. Do not style anything that is returned or use bullet points.`
             },
         ],
         model: "gpt-3.5-turbo",

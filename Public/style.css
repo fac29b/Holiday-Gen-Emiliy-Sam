@@ -1,6 +1,8 @@
+/* Font imports */
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 
+/* Universal styles */
 * {
     padding: 0;
     margin: 0;
@@ -8,18 +10,27 @@
     width: 100%;
 }
 
-
-body{
+/* Body styles */
+body {
     background-color: purple;
-   
 }
+
+/* Heading styles */
+h1, h2, h3 {
+    font-family: 'Fugaz One', sans-serif;
+}
+
 h1 {
     display: flex;
     text-align: center;
     justify-content: center;
-    font-family: 'Fugaz One', sans-serif;
     font-size: 5em;
     color: yellow;
+}
+
+h2 {
+    font-size: 2.5em;
+    color: purple;
 }
 
 h3 {
@@ -29,30 +40,29 @@ h3 {
     text-align: center;
 }
 
-
+/* Container styles */
 #container {
     display: flex;
     justify-content: center;
     align-items: center; 
     flex-wrap: wrap;
     background-color: azure;
-    width: 35%; 
-    max-width: 600px; 
+    max-width: 400px; 
     padding: 1.5em;
     margin: auto; 
     text-align: center;
     position: relative;
 }
 
-
+/* Search styles */
 .search-wrapper {
     display: flex;
     width: 20vw;
-    height:6vh;
+    height: 6vh;
     padding-top: 0em;
 }
 
-#country-name{
+#country-name {
     border-radius: 10px;
     padding: 15px;
     margin: 10px;
@@ -62,27 +72,24 @@ h3 {
     background-color: purple; 
     text-align: center;
     height: fit-content;
-    color: white;
+    color: yellow;
     border: none;
-    width:auto;
+    width: auto;
     padding: 10px;
-    margin-bottom: 0px;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
     border-radius: 10px;
     font-size: 1rem;
     font-family: 'Fugaz One', sans-serif;
-    color: yellow;
 }
 
 #search-btn:hover {
     transform: scale(1.2);
-    transition: transform 1.5s ease;
     background-color: fuchsia;
-  }
+}
 
-
-  #loading-indicator {
+/* Loading indicator */
+#loading-indicator {
     display: none; 
     border: 5px solid #f3f3f3; 
     border-top: 5px solid purple; 
@@ -98,21 +105,18 @@ h3 {
     100% { transform: rotate(360deg); }
 }
 
-
-#results-box{
-    display: flex;
-    flex-wrap: wrap;
+/* Results box */
+#results-box {
     flex-direction: row;
     justify-content: space-evenly;
     display: none;
 }
 
-
-#result {
-    position: flex relative;
+/* Result and ChatGPT results styles */
+#result, #chatGPT-results {
     background-color: black;
     margin-top: 5em;
-    max-width: 44%;
+    max-width: 42%;
     max-height: fit-content;
     overflow: auto;
     border-radius: 15px;
@@ -120,41 +124,49 @@ h3 {
     margin: 1em 2em 1em 3em;
     color: white;
     font-family: 'Roboto Slab', serif;
+    flex-wrap: wrap;
+    flex-shrink: 0;
 }
 
-.fact-list {
-    list-style-type: none;
-    font-size: 1.4em;
-}
-
-#chatGPT-results{
-    position: flex relative;
+/* Travel links */
+#travel-links {
+    width: fit-content;
+    display: none;
+    margin: auto;
+    flex-wrap: wrap;
     background-color: black;
-    margin-top: 5em;
-    max-width: 44%;
-    max-height: fit-content;
-    overflow: auto;
+    text-align: center;
     border-radius: 15px;
-    padding: 3em;
-    margin: 1em 2em 1em 3em;
-    color: white;
-    font-family: 'Roboto Slab', serif;
+    padding-bottom: 3em;
 }
 
+#link-title {
+    color: yellow;
+    margin: 1em;
+    font-size: 2em;
+    
+}
+
+#booking-link {
+    background-color: #003580;
+    color: #feba02;
+    font-family: 'Roboto Slab', serif;
+    font-size: 2em;
+    border-radius: 10px;
+    padding: 2em;
+    margin-bottom: 1em;
+    width: fit-content;
+}
+
+/* Flag image */
 .flag-img {
     display: block;
     width: 80%;
     margin: 1.7em auto 1.2em auto;
-    box-shadow: 0 0 10px 5px #48abe0,
-    0 0 20px 7px #ebecca;
-}
-h2{
-    font-family: 'Fugaz One', sans-serif;
-    font-size: 2.5em;
-    color: purple;
-    padding-top: 0em;
+    box-shadow: 0 0 10px 5px #48abe0, 0 0 20px 7px #ebecca;
 }
 
+/* Banner styles */
 .bannerWrapper {
     position: relative;
     display: flex;
@@ -166,50 +178,44 @@ h2{
     z-index: 1;
 }
 
-
-
 .banner {
-    flex: 1 0 auto;
     width: 33%;
     height: auto;
     transition: opacity 0.5s ease;
     object-fit: cover;
-  }
-
-
-#loading-indicator{
-    display: none;
 }
 
-
-.chat-subtitles{
+/* Chat subtitles */
+.chat-subtitles {
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 1.4em;
 }
 
-#image-container{
-display: flex;
-justify-content: center;
-text-align: center;
+/* Image container styles */
+#image-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
-
-.image-item{
+/* Image item styles */
+.image-item {
     transition: 1s;
     display: none;
 }
 
-.image-item img{
+.image-item img {
     max-height: 500px;
     max-width: fit-content;
 }
 
-footer{
+/* Footer styles */
+footer {
     background-color: yellow;
 }
 
-.footer-text{
+.footer-text {
     font-family: 'Roboto Slab', serif;
     font-size: 1em;
     text-align: center;
@@ -217,55 +223,20 @@ footer{
     padding-right: 8em;
 }
 
-@media screen and (max-width: 576px){
-    .countries{
+/* Media queries */
+@media screen and (max-width: 576px) {
+    .countries {
         grid-template-columns: repeat(1, 1fr);
-    }
-}
-@media (max-width: 1100px) {
-    #container {
-        width: 80%; 
-        padding: 1em;
-    }
-
-    .search-wrapper {
-        width: 100%; 
-        padding: 1em;
-    }
-
-    h1, h2, h3 {
-        font-size: 3em; 
-    }
-
-    #result, #chatGPT-results {
-        max-width: 100%; 
-        margin: 1em; 
-        padding: 1em; 
-    }
-
-    .fact-list {
-        font-size: 1em; 
-    }
-
-    .footer-text {
-        padding-left: 1em;
-        padding-right: 1em;
     }
 }
 
 @media screen and (max-width: 400px) {
- 
     h1, h2, h3 {
         font-size: 1.5em;
     }
 }
 
-@media screen and (max-width: 400px){
-    .countries{
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     #container {
         width: 80%; 
         padding: 1em;
@@ -296,9 +267,12 @@ footer{
     }
 }
 
-@media screen and (max-width: 300px) {
- 
-    h1, h2, h3 {
-        font-size: 1.5em;
+@media screen and (max-width: 950px) {
+    .bannerWrapper {
+        flex-wrap: wrap-reverse;
+        max-height: fit-content;
     }
+
+    .banner {
+        width: 100%;
 }
