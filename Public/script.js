@@ -145,7 +145,7 @@ async function makeTravelPlan() {
     chatGPTResultsLoaded = false;
     countryDetailsLoaded = false;
 
-    document.getElementById("loading-indicator").style.display = "block";
+    document.getElementById("loading-container").style.display = "block";
 
     words.style.display = "none";
     document.getElementById("container").style.backgroundColor = "transparent";
@@ -156,7 +156,7 @@ async function makeTravelPlan() {
     await Promise.allSettled([fetchAndDisplayCountryDetails(), makeTravelPlan(), updateBannerImages()]);
 
 
-    document.getElementById("loading-indicator").style.display = "none";
+    document.getElementById("loading-container").style.display = "none";
 
  
     if (chatGPTResultsLoaded && countryDetailsLoaded) {
