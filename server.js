@@ -11,7 +11,7 @@ global.fetch = fetch;
 const unsplash = createApi({ accessKey: process.env.unsplashAPI });
 
 
-app.use(express.static('public')); 
+app.use(express.static('Public')); 
 
 // app.get('/', (req, res) => {
 //   res.send('Welcome to my Node.js Project');
