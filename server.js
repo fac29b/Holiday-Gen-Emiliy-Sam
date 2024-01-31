@@ -11,7 +11,7 @@ global.fetch = fetch;
 const unsplash = createApi({ accessKey: process.env.unsplashAPI });
 
 
-app.use(express.static('public')); 
+app.use(express.static('Public')); 
 
 app.get('/', (req, res) => {
   res.send('Welcome to my Node.js Project');
@@ -62,7 +62,12 @@ app.get('/unsplash', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
